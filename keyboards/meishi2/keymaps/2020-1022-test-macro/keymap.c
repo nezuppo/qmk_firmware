@@ -42,6 +42,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case TEST_MACRO:
             if (record->event.pressed) {
                 SEND_STRING("test macro");
+		SEND_STRING(SS_TAP(X_ENTER));
             }
             return false;
     }
