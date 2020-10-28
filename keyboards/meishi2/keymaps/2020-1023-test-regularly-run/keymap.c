@@ -36,8 +36,9 @@ void matrix_init_user(void) {
 void matrix_scan_user(void) {
     if (regrun_enter && timer_elapsed(regrun_timer) >= regrun_interval) {
         regrun_timer = timer_read();
-        SEND_STRING("test regularly run");
-        SEND_STRING(SS_TAP(X_ENTER));
+
+        tap_code(KC_MS_L);
+        tap_code(KC_MS_R);
     }
 }
 
