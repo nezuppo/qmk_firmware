@@ -30,7 +30,7 @@ void matrix_init_user(void) {
 }
 
 bool led_update_user(led_t led_state) {
-  writePin(PRO_MICRO_LED_TX, !led_state.num_lock);
-  writePin(PRO_MICRO_LED_RX, !led_state.caps_lock);
+  writePin(PRO_MICRO_LED_RX, !led_state.num_lock);
+  writePin(PRO_MICRO_LED_TX, !led_state.caps_lock);
   return true;
 }
