@@ -15,9 +15,17 @@
  */
 #include QMK_KEYBOARD_H
 
+bool regrun_enter;
+uint16_t regrun_timer = false;
+uint16_t regrun_interval = 30000; // (1000ms == 1s)
+
+enum my_keycodes {
+    TOGGLE_REGRUN = SAFE_RANGE
+};
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT( /* Base */
-    LCTL(KC_Z),  LCTL(KC_X),  LCTL(KC_C), LCTL(KC_V) \
+    TOGGLE_REGRUN,  RCTL(KC_X),  RCTL(KC_C), RCTL(KC_V) \
   )
 };
 
@@ -26,10 +34,26 @@ void matrix_init_user(void) {
 }
 
 void matrix_scan_user(void) {
+    if (regrun_enter && timer_elapsed(regrun_timer) >= regrun_interval) {
+        regrun_timer = timer_read();
 
+        tap_code(KC_MS_L);
+        tap_code(KC_MS_R);
+    }
 }
 
 void led_set_user(uint8_t usb_led) {
 
 }
 
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch(keycode){
+        case TOGGLE_REGRUN:
+            if (record->event.pressed) {
+                regrun_enter ^= 1;
+                regrun_timer = timer_read();
+            }
+            return false;
+    }
+    return true;
+}
