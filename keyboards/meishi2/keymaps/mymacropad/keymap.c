@@ -15,6 +15,8 @@
  */
 #include QMK_KEYBOARD_H
 
+#define PRO_MICRO_LED_TX D5
+
 bool regrun_enter;
 uint16_t regrun_timer = false;
 uint16_t regrun_interval = 30000; // (1000ms == 1s)
@@ -30,7 +32,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 void matrix_init_user(void) {
-
+    setPinOutput(PRO_MICRO_LED_TX);
 }
 
 void matrix_scan_user(void) {
