@@ -33,6 +33,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 void matrix_init_user(void) {
     setPinOutput(PRO_MICRO_LED_TX);
+    writePin(PRO_MICRO_LED_TX, !regrun_enter);
 }
 
 void matrix_scan_user(void) {
@@ -54,6 +55,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed) {
                 regrun_enter ^= 1;
                 regrun_timer = timer_read();
+
+                writePin(PRO_MICRO_LED_TX, !regrun_enter);
             }
             return false;
     }
