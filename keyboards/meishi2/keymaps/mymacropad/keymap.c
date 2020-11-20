@@ -14,6 +14,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include QMK_KEYBOARD_H
+#include <../mymacros.h>
+    // 以下を定義
+    // MACRO_STR_KEY2
+    // MACRO_STR_KEY3
+    // MACRO_STR_KEY4
 
 #define PRO_MICRO_LED_TX D5
 
@@ -22,12 +27,15 @@ uint16_t regrun_timer = false;
 uint16_t regrun_interval = 30000; // (1000ms == 1s)
 
 enum my_keycodes {
-    TOGGLE_REGRUN = SAFE_RANGE
+    TOGGLE_REGRUN = SAFE_RANGE,
+    KEY2,
+    KEY3,
+    KEY4
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT( /* Base */
-    TOGGLE_REGRUN,  RCTL(KC_X),  RCTL(KC_C), RCTL(KC_V) \
+    TOGGLE_REGRUN, KEY2, KEY3, KEY4 \
   )
 };
 
@@ -58,6 +66,21 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
                 writePin(PRO_MICRO_LED_TX, !regrun_enter);
             }
+            return false;
+        case KEY2:
+            if (record->event.pressed) {
+                SEND_STRING(MACRO_STR_KEY2);
+	    }
+            return false;
+        case KEY3:
+            if (record->event.pressed) {
+                SEND_STRING(MACRO_STR_KEY3);
+	    }
+            return false;
+        case KEY4:
+            if (record->event.pressed) {
+                SEND_STRING(MACRO_STR_KEY4);
+	    }
             return false;
     }
     return true;
