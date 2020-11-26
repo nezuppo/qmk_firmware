@@ -14,6 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include QMK_KEYBOARD_H
+#include <sendstring_jis.h>
 #include <../mymacros.h>
     // 以下を定義
     // MACRO_STR_KEY2
