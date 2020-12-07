@@ -29,11 +29,11 @@ uint16_t regrun_interval = 1000; // (1000ms == 1s)
 //    KEY4
 //};
 
-//const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-//  [0] = LAYOUT( /* Base */
-//    LCTL(KC_Z),  LCTL(KC_X),  LCTL(KC_C), LCTL(KC_V) \
-//  )
-//};
+const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+    [0] = LAYOUT( /* Base */
+        LCTL(KC_Z),  LCTL(KC_X),  LCTL(KC_C), LCTL(KC_V)
+    )
+};
 
 void matrix_init_user(void) {
     setPinOutput(PRO_MICRO_LED_TX);
