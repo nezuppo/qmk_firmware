@@ -44,12 +44,13 @@ void matrix_init_user(void) {
 }
 
 void matrix_scan_user(void) {
-    if (regrun_enter && timer_elapsed(regrun_timer) >= regrun_interval) {
+//    if (regrun_enter && timer_elapsed(regrun_timer) >= regrun_interval) {
+    if (timer_elapsed(regrun_timer) >= regrun_interval) {
         regrun_timer = timer_read();
 
-        regrun_enter ^= 1;
-        writePin(PRO_MICRO_LED_TX, !regrun_enter);
-        writePin(PRO_MICRO_LED_RX, regrun_enter);
+        led_flag ^= 1;
+        writePin(PRO_MICRO_LED_TX, !led_flag);
+        writePin(PRO_MICRO_LED_RX, led_flag);
     }
 }
 
